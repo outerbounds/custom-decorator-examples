@@ -1,0 +1,10 @@
+
+name = 'myproject'
+
+# run the flow hourly
+schedule = "0 * * * *"
+
+[limits]
+cpu = 2
+memory = 16000
+disk = 10000
