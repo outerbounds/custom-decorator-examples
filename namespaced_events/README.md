@@ -2,7 +2,7 @@
 
 This directory contains the `@namespaced_trigger` decorator and example flows demonstrating how to create event-driven workflows with automatic event name namespacing in Metaflow. On popular demand, this feature will be shipped as a part of Metaflow in the near future but for now, this is a workaround to attain similar functionality.
 
-The intention is that if a flow has a `@project` decorator, then the events raised by such a flow will have namespacing attached to them and a subsequent downstream flow can also be wired up to the same namespaced event. So For example a upstream flow belongs to project `foo` and branch `bar` and it raises an event `food`, then a downstream flow should be wired up to the same event `food` raised under the namespace of project `foo` and branch `bar`.
+The intention of exposing the `@namespaced_trigger` decorator is to enable automatic namespacing of events raised by flows using the `@project` decorator. When an upstream flow raises an event, the decorator ensures it's properly namespaced with the project and branch information. Downstream flows can then subscribe to these namespaced events to create coordinated workflows. For example, if an upstream flow in project `foo` and branch `bar` raises an event called `food`, a downstream flow can listen specifically for that event within the same project and branch namespace. This ensures events are properly scoped and only trigger the intended downstream flows.
 
 
 ## Overview
@@ -170,7 +170,7 @@ From upstream flows, publish events using:
 # Basic publishing
 namespaced_trigger.raise_event("food")
 
-# Safe publishing (recommended) : ie only published within a argo-workflows execution
+# Safe publishing (recommended)
 namespaced_trigger.raise_event("food", safe_publish=True)
 
 # With payload
