@@ -193,6 +193,7 @@ class namespaced_trigger(FlowMutator):
             mutable_flow.add_decorator(deco_type=trigger, deco_kwargs=_evt_kwargs)
 
         def _override_project_decorator(_project_kwargs):
+            mutable_flow.remove_decorator("project")
             mutable_flow.add_decorator(
                 deco_type=project,
                 deco_kwargs=_project_kwargs,
